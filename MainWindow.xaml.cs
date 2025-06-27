@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Text.RegularExpressions;
+using System.Windows.Media;
+using System.Media;
 
 namespace Chatbot
 {
@@ -191,10 +193,93 @@ namespace Chatbot
         private void InitializeQuiz()
         {
             quizQuestions = new List<QuizQuestion>
-            {
-                new QuizQuestion { QuestionText = "Phishing uses fake messages to trick you.", Options = new[] { "True", "False" }, CorrectAnswer = "True", Explanation = "Be cautious with unknown emails." },
-                new QuizQuestion { QuestionText = "Public Wi-Fi is always safe.", Options = new[] { "True", "False" }, CorrectAnswer = "False", Explanation = "Public Wi-Fi can be unsafe." }
-            };
+{
+    new QuizQuestion
+    {
+        QuestionText = "Phishing uses fake messages to trick you.",
+        Options = new[] { "True", "False" },
+        CorrectAnswer = "True",
+        Explanation = "Be cautious with unknown emails."
+    },
+    new QuizQuestion
+    {
+        QuestionText = "Public Wi-Fi is always safe.",
+        Options = new[] { "True", "False" },
+        CorrectAnswer = "False",
+        Explanation = "Public Wi-Fi can be unsafe."
+    },
+    new QuizQuestion
+    {
+        QuestionText = "Using the same password on multiple sites is secure.",
+        Options = new[] { "True", "False" },
+        CorrectAnswer = "False",
+        Explanation = "Reusing passwords increases your risk if one site gets compromised."
+    },
+    new QuizQuestion
+    {
+        QuestionText = "2FA means Two-Factor Authentication.",
+        Options = new[] { "True", "False" },
+        CorrectAnswer = "True",
+        Explanation = "2FA adds an extra layer of security to your login."
+    },
+    new QuizQuestion
+    {
+        QuestionText = "Which of the following is the most secure password?",
+        Options = new[] { "password123", "letmein", "abc123", "9u$T!xB2#qL" },
+        CorrectAnswer = "9u$T!xB2#qL",
+        Explanation = "Strong passwords use a mix of uppercase, lowercase, numbers, and symbols."
+    },
+    new QuizQuestion
+    {
+        QuestionText = "You should open attachments from unknown emails.",
+        Options = new[] { "True", "False" },
+        CorrectAnswer = "False",
+        Explanation = "They might contain malware or ransomware."
+    },
+    new QuizQuestion
+    {
+        QuestionText = "Which of the following is an example of two-factor authentication?",
+        Options = new[] { "Password only", "Security question", "Fingerprint and password", "Username and password" },
+        CorrectAnswer = "Fingerprint and password",
+        Explanation = "2FA requires two types of identity: something you know and something you have or are."
+    },
+    new QuizQuestion
+    {
+        QuestionText = "Ransomware encrypts your files and demands payment.",
+        Options = new[] { "True", "False" },
+        CorrectAnswer = "True",
+        Explanation = "It holds your files hostage until you pay, often with no guarantee of return."
+    },
+    new QuizQuestion
+    {
+        QuestionText = "What does a firewall do?",
+        Options = new[] { "Protects from power surges", "Blocks unauthorized access", "Cleans your disk", "Speeds up Wi-Fi" },
+        CorrectAnswer = "Blocks unauthorized access",
+        Explanation = "Firewalls prevent unwanted traffic from entering your network."
+    },
+    new QuizQuestion
+    {
+        QuestionText = "HTTPS means a website is secure.",
+        Options = new[] { "True", "False" },
+        CorrectAnswer = "True",
+        Explanation = "HTTPS encrypts data sent between your browser and the website."
+    },
+    new QuizQuestion
+    {
+        QuestionText = "What is the best way to protect your device on public Wi-Fi?",
+        Options = new[] { "Use incognito mode", "Connect automatically", "Use a VPN", "Turn off antivirus" },
+        CorrectAnswer = "Use a VPN",
+        Explanation = "VPNs encrypt your data and protect your privacy on open networks."
+    },
+    new QuizQuestion
+    {
+        QuestionText = "Antivirus software helps detect and remove threats.",
+        Options = new[] { "True", "False" },
+        CorrectAnswer = "True",
+        Explanation = "Antivirus tools scan for malware and protect your system."
+    }
+};
+
         }
 
         private string GetNextQuizQuestion()
@@ -334,10 +419,25 @@ namespace Chatbot
         private ChatBot bot = new ChatBot();
         private string userName = "friend";
 
+        private MediaPlayer mediaPlayer = new MediaPlayer();  // media player instance
+
         public ChatWindow()
         {
             InitializeComponent();
             chatbotOutput.AppendText("\uD83E\uDD16 Hello! I’m your Cybersecurity Assistant.\n");
+
+            // Play audio greeting
+            try
+            {
+                SoundPlayer player = new SoundPlayer(@"C:\Users\kylep\Desktop\ChatBot\Audio\_Hello Welcome to yo.wav"); // Use @ to avoid escape issues
+                player.Load();
+                player.Play();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Audio playback failed: " + ex.Message);
+            }
+
         }
 
         private void sendButton_Click(object sender, RoutedEventArgs e)
